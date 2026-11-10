@@ -1,0 +1,23 @@
+---
+title: "Info"
+---
+
+## About
+
+Coming soon.
+
+## Coming up
+
+New Mexico is next.
+
+## Get in touch
+
+Questions, corrections, or quibbles with the model: [contact@scientificdrawodds.com](mailto:contact@scientificdrawodds.com)
+
+## Disclaimer
+
+Scientific Draw Odds is not affiliated with the Alaska Department of Fish and Game or any other agency. The odds on this site are estimates, not guarantees. Always check the current regulations and drawing rules with the state agency before you apply.
+
+## Licenses
+
+The odds data are licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/): you may share and adapt them for noncommercial purposes, with credit to Scientific Draw Odds. Everything else on this site is © Conor McKinley, all rights reserved. For commercial use of anything here, email [contact@scientificdrawodds.com](mailto:contact@scientificdrawodds.com).

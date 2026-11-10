@@ -1,0 +1,36 @@
+project:
+  type: website
+  # Only the pages listed here are built into the site. Add each new
+  # state page to this list when it's ready to go live.
+  render:
+    - index.qmd
+    - alaska.qmd
+    - info.qmd
+
+website:
+  title: "Scientific Draw Odds"
+  site-url: "https://scientificdrawodds.com"
+  description: "Free draw odds for big-game hunts, starting with Alaska."
+  search: false
+  open-graph: true
+  navbar:
+    title: false
+    collapse: false
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "State"
+        menu:
+          - text: "Alaska"
+            href: alaska.qmd
+      - text: "Info"
+        href: info.qmd
+  page-footer:
+    left: "© 2026 Conor McKinley"
+    right: "Not affiliated with any state wildlife agency."
+
+format:
+  html:
+    theme: [default, styles.scss]
+    lang: en
+    anchor-sections: false

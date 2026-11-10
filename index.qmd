@@ -1,11 +1,8 @@
 ---
-title: "Welcome to Scientific Draw Odds."
 pagetitle: "Scientific Draw Odds"
 ---
 
-::: {.status}
-Alaska odds for this season’s draw are coming soon.
-:::
+Welcome to Scientific Draw Odds.
 
 Every year, I spend a lot of time thinking about my big game draws. Often, this involves making my own model. Given that I’ve been doing most of the work anyway, I decided to publish my results (for free). To use my website, select a state, input your residency/points information, and load the spreadsheet. I also include a document with my advice for each state, as well as a methodology document.
 
@@ -18,5 +15,6 @@ I think what I publish is the best on the market. I explain exactly how each dra
 Best of luck in your draws, as long as you’re not applying for my units!
 
 ::: {.signature}
-Conor McKinley
+Conor McKinley\
+November 2026
 :::

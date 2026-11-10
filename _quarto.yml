@@ -14,7 +14,6 @@ website:
   search: false
   open-graph: true
   navbar:
-    title: false
     collapse: false
     left:
       - text: "Home"
@@ -23,11 +22,16 @@ website:
         menu:
           - text: "Alaska"
             href: alaska.qmd
+          - text: "New Mexico (January 2027)"
+          - text: "Arizona (planned)"
+          - text: "Colorado (planned)"
+          - text: "Idaho (planned)"
+          - text: "Montana (planned)"
+          - text: "Nevada (planned)"
+          - text: "Utah (planned)"
+          - text: "Wyoming (planned)"
       - text: "Info"
         href: info.qmd
-  page-footer:
-    left: "© 2026 Conor McKinley"
-    right: "Not affiliated with any state wildlife agency."
 
 format:
   html:

@@ -147,6 +147,26 @@ h1.title {
   margin: 0;
 }
 
+// Fine print: licensing and disclaimer at the foot of the Info page
+.fine-print {
+  margin-top: 56px;
+  color: $sdo-muted;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.fine-print p {
+  margin-bottom: 10px;
+}
+
+.fine-print a {
+  color: inherit;
+}
+
+.fine-print a:hover {
+  color: $sdo-amber;
+}
+
 :focus-visible {
   outline: 2px solid $sdo-amber;
   outline-offset: 2px;

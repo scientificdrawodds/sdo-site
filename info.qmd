@@ -17,12 +17,8 @@ Coming soon.
 - Email: [contact@scientificdrawodds.com](mailto:contact@scientificdrawodds.com)
 - Errors and quibbles with the model: same address.
 
-## Data and licenses
+::: {.fine-print}
+Each state’s odds will be downloadable as a CSV, licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/): you may share and adapt them for noncommercial purposes, with credit to Scientific Draw Odds. Everything else on this site is ©\ Conor McKinley, all rights reserved. For commercial use of anything here, email [contact@scientificdrawodds.com](mailto:contact@scientificdrawodds.com).
 
-Each state’s odds will be downloadable as a CSV, licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/): you may share and adapt them for noncommercial purposes, with credit to Scientific Draw Odds. Everything else on this site is © Conor McKinley, all rights reserved. For commercial use of anything here, email [contact@scientificdrawodds.com](mailto:contact@scientificdrawodds.com). Sources are the agencies’ own publications, cited in each state’s methodology. Predictions are frozen before each deadline and compared with the real draw afterward.
-
-## Disclaimer
-
-::: {.muted}
 Scientific Draw Odds is not affiliated with any state wildlife agency. Odds are estimates built from public data and can be wrong. Permit counts, seasons and eligibility rules change; confirm them with the agency before you apply.
 :::

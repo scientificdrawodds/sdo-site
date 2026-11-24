@@ -9,6 +9,7 @@ project:
   # Data files the pages read in the browser or offer for download
   resources:
     - data/alaska_2027.csv
+    - alaska.js
 
 website:
   title: "Scientific Draw Odds"

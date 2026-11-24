@@ -8,7 +8,7 @@ Coming soon.
 
 ## What I’m working on now
 
-- Alaska 2027 draw: coming soon.
+- [Alaska 2027 draw](alaska.qmd): live.
 - New Mexico 2027 draw: January 2027.
 - Alaska scorecard: my forecasts compared with the actual draw, after results post in February 2027.
 
@@ -18,7 +18,7 @@ Coming soon.
 - Errors and quibbles with the model: same address.
 
 ::: {.fine-print}
-Each state’s odds will be downloadable as a CSV, licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/): you may share and adapt them for noncommercial purposes, with credit to Scientific Draw Odds. Everything else on this site is ©\ Conor McKinley, all rights reserved. For commercial use of anything here, email [contact@scientificdrawodds.com](mailto:contact@scientificdrawodds.com).
+Each state’s odds are downloadable as a CSV, licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/): you may share and adapt them for noncommercial purposes, with credit to Scientific Draw Odds. Everything else on this site is ©\ Conor McKinley, all rights reserved. For commercial use of anything here, email [contact@scientificdrawodds.com](mailto:contact@scientificdrawodds.com).
 
 Scientific Draw Odds is not affiliated with any state wildlife agency. Odds are estimates built from public data and can be wrong. Permit counts, seasons and eligibility rules change; confirm them with the agency before you apply.
 :::

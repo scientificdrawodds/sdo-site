@@ -6,6 +6,9 @@ project:
     - index.qmd
     - alaska.qmd
     - info.qmd
+  # Data files the pages read in the browser or offer for download
+  resources:
+    - data/alaska_2027.csv
 
 website:
   title: "Scientific Draw Odds"

@@ -172,6 +172,241 @@ h1.title {
   outline-offset: 2px;
 }
 
+// State pages: filters, hunt count, hunt table and download.
+// Everything stays on the dark palette; no white or light backgrounds.
+$sdo-field: #1F1F1F;        // input and select fields
+$sdo-field-border: #3A3A3A;
+
+.sdo-filters,
+.sdo-table-wrap {
+  color-scheme: dark;
+}
+
+.sdo-filters {
+  margin: 28px 0 0;
+}
+
+// Observable Inputs injects its own styles (form.oi-…, .oi-…-input > input);
+// these selectors outrank them
+.sdo-filters div > form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  width: auto;
+  max-width: 100%;
+  margin: 0 0 12px;
+  font: inherit;
+}
+
+.sdo-filters div > form > label {
+  flex: 0 0 64px;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+  color: $sdo-text;
+}
+
+.sdo-filters div > form > select,
+.sdo-filters div > form > div {
+  flex: 1 1 200px;
+  width: auto;
+  max-width: 340px;
+}
+
+.sdo-filters div > form input,
+.sdo-filters div > form select {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 38px;
+  padding: 6px 10px;
+  font: inherit;
+  font-size: 15px;
+  color: $sdo-text;
+  background-color: $sdo-field;
+  border: 1px solid $sdo-field-border;
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.sdo-filters div > form input:focus,
+.sdo-filters div > form select:focus {
+  border-color: $sdo-field-border;
+  box-shadow: none;
+}
+
+.sdo-filters input::placeholder {
+  color: $sdo-muted;
+  opacity: 1;
+}
+
+.sdo-filters option {
+  color: $sdo-text;
+  background-color: $sdo-field;
+}
+
+.sdo-count p {
+  margin: 4px 0 12px;
+  color: $sdo-muted;
+  font-size: 14px;
+}
+
+// The table scrolls inside its own box: the hunt number stays put on the left
+// and the header row stays put on top.
+.sdo-table-wrap {
+  max-height: 75vh;
+  overflow: auto;
+  border: 1px solid $sdo-rule;
+  background-color: $sdo-bg;
+}
+
+.sdo-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: max-content;
+  min-width: 100%;
+  line-height: 1.4;
+  color: $sdo-text;
+  background-color: $sdo-bg;
+}
+
+// Quarto's OJS stylesheet forces the table's own font size, so size the cells
+.sdo-table th,
+.sdo-table td {
+  padding: 7px 8px;
+  font-size: 14px;
+  text-align: left;
+  vertical-align: top;
+  font-weight: normal;
+  background-color: $sdo-bg;
+  border-bottom: 1px solid $sdo-rule;
+}
+
+.sdo-table .num {
+  text-align: right;
+}
+
+// Quarto styles OJS table headers with div.observablehq table thead tr th,
+// so this selector has to outrank it
+.sdo-table-wrap .sdo-table thead tr th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  vertical-align: bottom;
+  font-weight: 600;
+  background-color: $sdo-ribbon;
+  border-bottom-color: $sdo-field-border;
+}
+
+.sdo-table th[scope="row"],
+.sdo-table thead th:first-child {
+  position: sticky;
+  left: 0;
+  border-right: 1px solid $sdo-rule;
+}
+
+.sdo-table th[scope="row"] {
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.sdo-table-wrap .sdo-table thead tr th:first-child {
+  z-index: 3;
+}
+
+// Quarto adds Bootstrap's grey .btn .btn-quarto to buttons in OJS output;
+// make the sort buttons plain header text in every state
+.sdo-table thead th button.btn {
+  --bs-btn-padding-x: 0;
+  --bs-btn-padding-y: 0;
+  --bs-btn-font-size: inherit;
+  --bs-btn-font-weight: inherit;
+  --bs-btn-line-height: inherit;
+  --bs-btn-color: #{$sdo-text};
+  --bs-btn-bg: transparent;
+  --bs-btn-border-width: 0;
+  --bs-btn-border-color: transparent;
+  --bs-btn-border-radius: 0;
+  --bs-btn-hover-color: #{$sdo-text};
+  --bs-btn-hover-bg: transparent;
+  --bs-btn-hover-border-color: transparent;
+  --bs-btn-active-color: #{$sdo-text};
+  --bs-btn-active-bg: transparent;
+  --bs-btn-active-border-color: transparent;
+  --bs-btn-active-shadow: none;
+  --bs-btn-focus-box-shadow: none;
+  padding: 0;
+  font: inherit;
+  text-align: inherit;
+  vertical-align: baseline;
+  color: $sdo-text;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.sdo-table thead th button.btn:hover {
+  text-decoration: underline;
+}
+
+.sdo-table thead th button.btn:focus-visible {
+  outline: 2px solid $sdo-amber;
+  outline-offset: 1px;
+  box-shadow: none;
+}
+
+.sdo-table th[aria-sort="ascending"] button::after {
+  content: " \25B2";
+  font-size: 10px;
+}
+
+.sdo-table th[aria-sort="descending"] button::after {
+  content: " \25BC";
+  font-size: 10px;
+}
+
+// Column widths: the first four columns fit on a phone; the rest scroll
+.sdo-table .col-species       { min-width: 92px;  max-width: 110px; }
+.sdo-table .col-unit          { min-width: 120px; max-width: 180px; }
+.sdo-table .col-chance-of-drawing { min-width: 78px; max-width: 90px; }
+.sdo-table td.col-chance-of-drawing { white-space: nowrap; }
+.sdo-table .col-notes         { min-width: 150px; max-width: 170px; }
+.sdo-table .col-area          { min-width: 300px; max-width: 440px; overflow-wrap: anywhere; }
+.sdo-table .col-season        { min-width: 150px; max-width: 220px; }
+.sdo-table .col-legal-animal  { min-width: 200px; max-width: 280px; }
+.sdo-table .col-who-can-apply { min-width: 180px; max-width: 240px; }
+.sdo-table .col-restrictions  { min-width: 180px; max-width: 240px; }
+.sdo-table .col-permits       { white-space: nowrap; }
+
+// On a phone: Hunt, Species, Unit and Chance of drawing fit across the screen
+@media (max-width: 575.98px) {
+  .sdo-table th,
+  .sdo-table td {
+    padding: 6px;
+    font-size: 13px;
+  }
+
+  .sdo-table .col-species           { min-width: 0; width: 80px;  max-width: 80px; }
+  .sdo-table .col-unit              { min-width: 0; width: 106px; max-width: 106px; }
+  .sdo-table .col-chance-of-drawing { min-width: 0; width: 76px;  max-width: 76px; }
+}
+
+.sdo-download {
+  margin-top: 20px;
+}
+
+.sdo-download p:first-child {
+  margin-bottom: 4px;
+}
+
+.sdo-download p + p {
+  color: $sdo-muted;
+  font-size: 14px;
+}
+
 @media (max-width: 575.98px) {
   #quarto-header > nav {
     padding-left: 16px;

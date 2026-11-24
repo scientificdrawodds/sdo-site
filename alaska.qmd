@@ -1,5 +1,171 @@
 ---
 title: "Alaska — 2027 draw"
+description: "Free estimated draw odds for every Alaska 2027 drawing permit hunt."
+execute:
+  echo: false
+code-copy: false
 ---
 
-Odds for Alaska’s 2027 drawing permit hunts are coming soon, along with the methodology and my notes on applying.
+Applications close December 15, 2026, at 5 p.m. Alaska time, at [hunt.alaska.gov](https://hunt.alaska.gov). Results are posted February 19, 2027.
+
+[Odds as of November 24, 2026.]{.muted}
+
+The chance of drawing is our estimate for one application in the 2027 drawing. A Low Confidence note marks a hunt where that estimate is less certain, because few people apply or the hunt or its rules are new.
+
+::: {.sdo-filters}
+
+```{ojs}
+viewof species = Inputs.select(["All", ...speciesList], {label: "Species", value: "All"})
+viewof query = Inputs.text({label: "Search", placeholder: "Hunt number, unit or area"})
+```
+
+:::
+
+::: {.sdo-count role="status"}
+
+```{ojs}
+shown.length > 0
+  ? html`<p>Showing ${shown.length} of ${hunts.length} hunts.</p>`
+  : html`<p>No hunts match. Try a shorter search or set Species to All.</p>`
+```
+
+:::
+
+```{ojs}
+huntTable(shown)
+```
+
+::: {.sdo-download}
+
+[Download the full table (CSV)](data/alaska_2027.csv){download="scientific-draw-odds-alaska-2027.csv"}
+
+Free to share and adapt for noncommercial use, with credit ([CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)).
+
+:::
+
+Hunt details are summarized from ADF&G's 2027-2028 Drawing Permit Hunt Supplement. Check the supplement before you apply.
+
+```{ojs}
+//| output: false
+
+// The table as published, one row per hunt. The CSV starts with a byte-order
+// mark so Excel shows dashes and apostrophes; strip it from the first header
+// in case the browser hasn't.
+hunts = {
+  const raw = await FileAttachment("data/alaska_2027.csv").csv();
+  const rows = raw.map(d => Object.fromEntries(
+    Object.entries(d).map(([k, v]) => [k.replace(/^﻿/, ""), v])
+  ));
+  // Default order: species, then hunt number
+  return rows.sort((a, b) => cmp(a.Species, b.Species) || cmp(a.Hunt, b.Hunt));
+}
+
+speciesList = [...new Set(hunts.map(d => d.Species))].sort(cmp)
+
+// Species filter, then a search of hunt number, unit and area
+shown = {
+  const q = query.trim().toLowerCase();
+  return hunts.filter(d =>
+    (species === "All" || d.Species === species) &&
+    (q === "" || [d.Hunt, d.Unit, d.Area].some(v => v.toLowerCase().includes(q)))
+  );
+}
+
+// Columns in display order. Chance of drawing and Permits sort by their
+// numbers; "under 0.1%" sorts below 0.1%.
+columns = [
+  {key: "Hunt", rowHeader: true},
+  {key: "Species"},
+  {key: "Unit"},
+  {key: "Chance of drawing", num: true, value: s => {
+    const n = parseFloat(s.replace(/[^0-9.]/g, ""));
+    return /^under/i.test(s) ? n / 2 : n;
+  }},
+  {key: "Notes"},
+  {key: "Area"},
+  {key: "Season"},
+  {key: "Legal animal"},
+  {key: "Who can apply"},
+  {key: "Restrictions"},
+  {key: "Permits", num: true, value: s => parseFloat(s.replace(/[^0-9.]/g, ""))}
+]
+
+cmp = (a, b) => a < b ? -1 : a > b ? 1 : 0
+
+// The column the reader last sorted by. It lives outside the table so it
+// survives a change of filter.
+sortState = ({key: null, dir: 1})
+
+huntTable = rows => {
+  const wrap = document.createElement("div");
+  wrap.className = "sdo-table-wrap";
+  wrap.tabIndex = 0;
+  wrap.setAttribute("role", "region");
+  wrap.setAttribute("aria-label", "Alaska 2027 drawing permit hunts");
+
+  const table = document.createElement("table");
+  table.className = "sdo-table";
+  const headRow = table.createTHead().insertRow();
+  const body = table.createTBody();
+
+  const heads = columns.map(c => {
+    const th = document.createElement("th");
+    th.scope = "col";
+    th.className = "col-" + c.key.toLowerCase().replace(/[^a-z]+/g, "-");
+    if (c.num) th.classList.add("num");
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = c.key;
+    button.addEventListener("click", () => {
+      if (sortState.key === c.key) sortState.dir = -sortState.dir;
+      else Object.assign(sortState, {key: c.key, dir: 1});
+      draw();
+    });
+    th.append(button);
+    headRow.append(th);
+    return th;
+  });
+
+  function sorted() {
+    const c = columns.find(c => c.key === sortState.key);
+    if (!c) return rows;
+    const v = c.value ?? (s => s.toLowerCase());
+    // Ties keep the default order (species, then hunt number)
+    return rows
+      .map((d, i) => ({d, i, v: v(d[c.key])}))
+      .sort((a, b) => sortState.dir * cmp(a.v, b.v) || a.i - b.i)
+      .map(x => x.d);
+  }
+
+  function draw() {
+    heads.forEach((th, i) => {
+      if (columns[i].key === sortState.key) {
+        th.setAttribute("aria-sort", sortState.dir > 0 ? "ascending" : "descending");
+      } else {
+        th.removeAttribute("aria-sort");
+      }
+    });
+    body.replaceChildren(...sorted().map(d => {
+      const tr = document.createElement("tr");
+      columns.forEach((c, i) => {
+        const cell = document.createElement(c.rowHeader ? "th" : "td");
+        if (c.rowHeader) cell.scope = "row";
+        cell.className = heads[i].className;
+        // Let "Brown/grizzly bear" and similar wrap after the slash
+        const parts = d[c.key].split("/");
+        parts.forEach((p, j) => {
+          if (j > 0) cell.append(document.createElement("wbr"));
+          cell.append(j < parts.length - 1 ? p + "/" : p);
+        });
+        tr.append(cell);
+      });
+      return tr;
+    }));
+  }
+
+  draw();
+  wrap.hidden = rows.length === 0;
+  wrap.append(table);
+  return wrap;
+}
+```

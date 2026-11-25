@@ -1,13 +1,13 @@
 ---
 title: "Alaska — 2027 draw"
+pagetitle: "SDO - Alaska"
+title-prefix: "SDO - Alaska"   # the same as pagetitle, so the tab title has no site name after it
 description: "Free estimated draw odds for every Alaska 2027 drawing permit hunt."
+open-graph:
+  title: "Alaska 2027 Draw Odds | Scientific Draw Odds"
 ---
 
 Applications close December 15, 2026, at 5 p.m. Alaska time, at [hunt.alaska.gov](https://hunt.alaska.gov). Results are posted February 19, 2027.
-
-[Odds as of November 24, 2026.]{.muted}
-
-Draw Probability is our estimate of drawing the hunt with one entry, and with six if you put all six of your entries for the species on it. A dash means the hunt allows only one entry. A Low Confidence forecast note marks a hunt where that estimate is less certain, because few people apply or the hunt or its rules are new. Click a hunt number for its area, legal animal, who can apply and restrictions.
 
 ```{=html}
 <div class="sdo-controls">

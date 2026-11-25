@@ -9,7 +9,7 @@
   var DB200 = "Residents, and nonresidents hunting with a relative within second-degree of kindred";
   // Nonresidents must hunt these species with a licensed guide or a resident relative
   var GUIDE_SPECIES = ["Brown/grizzly bear", "Sheep", "Goat"];
-  var DETAILS = ["Area", "Legal animal", "Who can apply", "Restrictions"];
+  var DETAILS = ["Area", "Legal animal", "Who can apply", "Restrictions", "Limit"];
   // Season dates written without a year fall in the 2027-2028 hunting year, July 1, 2027, to June 30, 2028
   var HUNT_YEAR = 2027;
   var MONTHS = {jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12};
@@ -25,10 +25,11 @@
     {key: "Hunt", label: "Hunt", sort: "text", filter: "list", css: "col-hunt"},
     {key: "Species", label: "Species", sort: "text", filter: "list", css: "col-species"},
     {key: "Unit", label: "Unit", sort: "text", filter: "list", css: "col-unit"},
-    {key: "Draw Probability (1 entry)", label: "1 entry", group: "Draw Probability", sort: "number", filter: "range",
-     pct: true, css: "col-prob num"},
-    {key: "Draw Probability (6 entries)", label: "6 entries", group: "Draw Probability", sort: "number", filter: "range",
-     pct: true, css: "col-prob num"},
+    // a no-break space keeps "(1 entry)" together when the name wraps
+    {key: "Probability (1 entry)", label: "Probability (1 entry)", sort: "number", filter: "range", pct: true,
+     css: "col-prob num"},
+    {key: "Probability (6 entries)", label: "Probability (6 entries)", sort: "number", filter: "range", pct: true,
+     css: "col-prob num"},
     {key: "Permits", label: "Permits", sort: "number", filter: "range", css: "col-permits num"},
     {key: "Season", label: "Season", sort: "date", filter: "list", css: "col-season"},
     {key: "Forecast Notes", label: "Forecast Notes", sort: "text", filter: "list", blank: "No note", css: "col-notes"}
@@ -215,7 +216,6 @@
 
   function headButton(c) {
     var b = el("button", {type: "button", class: "sdo-head", "aria-haspopup": "dialog", "aria-expanded": "false"});
-    if (c.group) b.append(el("span", {class: "visually-hidden"}, c.group + ", "));
     b.append(el("span", {class: "sdo-head-label"}, c.label));
     var icons = el("span", {class: "sdo-head-icons"});
     icons.append(el("span", {class: "sdo-arrow", "aria-hidden": "true"}), funnel(),
@@ -232,9 +232,7 @@
 
   function build() {
     var table = el("table", {class: "sdo-table"});
-    var thead = table.createTHead();
-    var r1 = thead.insertRow(), r2 = thead.insertRow();
-    var groupDone = false;
+    var head = table.createTHead().insertRow();
     COLUMNS.forEach(function (c) {
       var th = el("th", {scope: "col", class: c.css + " sdo-has-menu"});
       var b = headButton(c);
@@ -242,16 +240,7 @@
       // the whole header cell opens the menu, not only its text
       th.addEventListener("click", function (e) { if (!b.contains(e.target)) toggleMenu(c, b, false); });
       heads.push(b);
-      if (c.group) {
-        if (!groupDone) {
-          r1.append(el("th", {scope: "colgroup", colspan: "2", class: "sdo-group"}, c.group));
-          groupDone = true;
-        }
-        r2.append(th);
-      } else {
-        th.rowSpan = 2;
-        r1.append(th);
-      }
+      head.append(th);
     });
     tbody = table.createTBody();
     wrap.replaceChildren(table);
@@ -332,7 +321,7 @@
   // A menu has the column's sorts, then its filter. Every change applies at once and the menu stays open.
   function openMenu(c, button, byKeyboard) {
     closeMenu(false);
-    var name = c.group ? c.group + ", " + c.label : c.label;
+    var name = c.label;
     var box = el("div", {class: "sdo-menu", id: "sdo-menu", role: "dialog", tabindex: "-1",
                          "aria-label": name + ": sort and filter"});
     var sorts = el("div", {class: "sdo-menu-sort"});

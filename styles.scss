@@ -302,13 +302,7 @@ $sdo-field-border: #3A3A3A;
   font-weight: 600;
 }
 
-.sdo-table thead th.sdo-group {
-  text-align: center;
-  padding-bottom: 3px;
-}
-
-.sdo-table thead th[rowspan],
-.sdo-table thead tr:last-child th {
+.sdo-table thead th {
   border-bottom-color: $sdo-field-border;
 }
 
@@ -343,7 +337,6 @@ $sdo-field-border: #3A3A3A;
   text-underline-offset: 2px;
 }
 
-.sdo-head-label,
 .sdo-head-icons {
   white-space: nowrap;
 }

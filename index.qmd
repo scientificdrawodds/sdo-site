@@ -4,7 +4,7 @@ pagetitle: "Scientific Draw Odds"
 
 Welcome to Scientific Draw Odds.
 
-Every year, I spend a lot of time thinking about my big game draws. Often, this involves making my own model. Given that I’ve been doing most of the work anyway, I decided to publish my results (for free). To use my website, select a state, input your residency/points information, and load the spreadsheet. I also include a document with my advice for each state, as well as a methodology document.
+Every year, I spend a lot of time thinking about my big game draws. Often, this involves making my own model. Given that I’ve been doing most of the work anyway, I decided to publish my results (for free). To use my website, select a state, input your residency/points information, and load the spreadsheet. I also include my notes for each state.
 
 Best of luck in your draws, as long as you’re not applying for my units!
 

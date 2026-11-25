@@ -10,10 +10,13 @@ project:
   resources:
     - data/alaska_2027.csv
     - alaska.js
+    - apple-touch-icon.png
 
 website:
   title: "Scientific Draw Odds"
   site-url: "https://scientificdrawodds.com"
+  # An amber S on the dark background: 32 px for browser tabs, 180 px for phone home screens
+  favicon: favicon.png
   description: "Free draw odds for big-game hunts, starting with Alaska."
   search: false
   open-graph: true
@@ -26,14 +29,6 @@ website:
         menu:
           - text: "Alaska"
             href: alaska.qmd
-          - text: "New Mexico (January 2027)"
-          - text: "Arizona (planned)"
-          - text: "Colorado (planned)"
-          - text: "Idaho (planned)"
-          - text: "Montana (planned)"
-          - text: "Nevada (planned)"
-          - text: "Utah (planned)"
-          - text: "Wyoming (planned)"
       - text: "Info"
         href: info.qmd
 
@@ -42,3 +37,5 @@ format:
     theme: [default, styles.scss]
     lang: en
     anchor-sections: false
+    include-in-header:
+      text: '<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">'

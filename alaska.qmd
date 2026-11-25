@@ -2,9 +2,12 @@
 title: "Alaska — 2027 draw"
 pagetitle: "SDO - Alaska"
 title-prefix: "SDO - Alaska"   # the same as pagetitle, so the tab title has no site name after it
-description: "Free estimated draw odds for every Alaska 2027 drawing permit hunt."
+# Search and link-preview description only: set as description-meta and open-graph's description, not description,
+# so it isn't shown under the title
+description-meta: "Free estimated draw odds for every Alaska 2027 drawing permit hunt."
 open-graph:
   title: "Alaska 2027 Draw Odds | Scientific Draw Odds"
+  description: "Free estimated draw odds for every Alaska 2027 drawing permit hunt."
 ---
 
 Applications close December 15, 2026, at 5 p.m. Alaska time, at [hunt.alaska.gov](https://hunt.alaska.gov). Results are posted February 19, 2027.

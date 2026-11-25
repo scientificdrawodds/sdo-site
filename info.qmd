@@ -4,22 +4,18 @@ pagetitle: "SDO - Info"
 title-prefix: "SDO - Info"   # the same as pagetitle, so the tab title has no site name after it
 open-graph:
   title: "Info – Scientific Draw Odds"
+  description: "Free draw odds for big-game hunts, starting with Alaska."   # pinned: without the About section, Quarto drops it
 ---
-
-## About
-
-Coming soon.
 
 ## What I’m working on now
 
 - [Alaska 2027 draw](alaska.qmd): live.
-- New Mexico 2027 draw: January 2027.
-- Alaska scorecard: my forecasts compared with the actual draw, after results post in February 2027.
+- Next up: New Mexico.
 
 ## Get in touch
 
 - Email: [contact@scientificdrawodds.com](mailto:contact@scientificdrawodds.com)
-- Errors and quibbles with the model: same address.
+- Quibbles welcome.
 
 ::: {.fine-print}
 Each state’s odds are downloadable as a CSV, licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/): you may share and adapt them for noncommercial purposes, with credit to Scientific Draw Odds. Everything else on this site is ©\ Conor McKinley, all rights reserved. For commercial use of anything here, email [contact@scientificdrawodds.com](mailto:contact@scientificdrawodds.com).

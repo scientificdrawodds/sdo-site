@@ -20,17 +20,13 @@ Draw Probability is our estimate of drawing the hunt with one entry, and with si
     </select>
   </label>
   <label class="sdo-control">
-    <span>Guide status</span>
+    <span>Guide status (nonresidents only)</span>
     <select id="sdo-guide" disabled>
       <option value="any">Any</option>
       <option value="guide">With a guide</option>
       <option value="relative">With a resident relative</option>
       <option value="neither">Neither (US citizens only)</option>
     </select>
-  </label>
-  <label class="sdo-control sdo-search">
-    <span>Search</span>
-    <input type="search" id="sdo-search" placeholder="Any word" autocomplete="off">
   </label>
   <a class="sdo-button" href="data/alaska_2027.csv" download="scientific-draw-odds-alaska-2027.csv">Download CSV</a>
   <button type="button" class="sdo-button" id="sdo-clear">Clear filters</button>

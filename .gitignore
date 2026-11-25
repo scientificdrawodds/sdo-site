@@ -1,5 +1,8 @@
 /.quarto/
 /_site/
+
+# Claude Code's local settings
+.claude/
 .DS_Store
 Thumbs.db
 

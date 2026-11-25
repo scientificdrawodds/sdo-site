@@ -172,7 +172,7 @@ h1.title {
   outline-offset: 2px;
 }
 
-// State pages: controls, hunt count, hunt table with a filter in every column header, and hunt details.
+// State pages: controls, hunt count, hunt table whose column names open sort and filter menus, and hunt details.
 // Everything stays on the dark palette; no white or light backgrounds.
 $sdo-field: #1F1F1F;        // inputs, pick-lists, buttons and the details row
 $sdo-field-border: #3A3A3A;
@@ -187,7 +187,8 @@ $sdo-field-border: #3A3A3A;
 }
 
 .sdo-controls,
-.sdo-table-wrap {
+.sdo-table-wrap,
+.sdo-menu {
   color-scheme: dark;
 }
 
@@ -218,28 +219,12 @@ $sdo-field-border: #3A3A3A;
   font-size: 14px;
 }
 
-.sdo-search {
-  flex: 1 1 110px;
-  min-width: 110px;
-}
-
-.sdo-search input {
-  width: 100%;
-}
-
 .sdo-controls select:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.sdo-controls input::placeholder,
-.sdo-table input::placeholder {
-  color: $sdo-muted;
-  opacity: 1;
-}
-
-.sdo-controls option,
-.sdo-table option {
+.sdo-controls option {
   color: $sdo-text;
   background-color: $sdo-field;
 }
@@ -322,7 +307,8 @@ $sdo-field-border: #3A3A3A;
   padding-bottom: 3px;
 }
 
-.sdo-table thead tr:last-child td {
+.sdo-table thead th[rowspan],
+.sdo-table thead tr:last-child th {
   border-bottom-color: $sdo-field-border;
 }
 
@@ -336,7 +322,8 @@ $sdo-field-border: #3A3A3A;
   border-right: 1px solid $sdo-rule;
 }
 
-.sdo-table .sdo-sort {
+// A column name opens its menu. It shows the sort direction, a funnel when the column is filtered, and a caret.
+.sdo-table .sdo-head {
   padding: 0;
   font: inherit;
   text-align: inherit;
@@ -346,53 +333,272 @@ $sdo-field-border: #3A3A3A;
   cursor: pointer;
 }
 
-.sdo-table .sdo-sort:hover {
+.sdo-table thead th.sdo-has-menu {
+  cursor: pointer;
+}
+
+.sdo-table thead th.sdo-has-menu:hover .sdo-head-label,
+.sdo-table .sdo-head[aria-expanded="true"] .sdo-head-label {
   text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
-.sdo-table th[aria-sort="ascending"] .sdo-sort::after {
-  content: " \25B2";
+.sdo-head-label,
+.sdo-head-icons {
+  white-space: nowrap;
+}
+
+.sdo-arrow:not(:empty) {
+  margin-left: 3px;
   font-size: 10px;
 }
 
-.sdo-table th[aria-sort="descending"] .sdo-sort::after {
-  content: " \25BC";
-  font-size: 10px;
+.sdo-mark {
+  display: none;
+  width: 11px;
+  height: 11px;
+  margin-left: 4px;
+  color: $sdo-amber;
+  vertical-align: -1px;
 }
 
-// The filter row
-.sdo-filter-row td {
-  padding-top: 4px;
-  padding-bottom: 8px;
+.sdo-head.is-filtered .sdo-mark {
+  display: inline-block;
 }
 
-.sdo-filter-row input,
-.sdo-filter-row select {
+.sdo-caret {
+  margin-left: 3px;
+  color: $sdo-muted;
+  font-size: 12px;
+}
+
+// The menu under a column name: its sorts, then its filter
+.sdo-menu {
+  position: fixed;
+  z-index: 1040;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 270px;
+  max-width: calc(100vw - 16px);
+  padding: 6px 0 12px;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.4;
+  color: $sdo-text;
+  background-color: $sdo-ribbon;
+  border: 1px solid $sdo-field-border;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.sdo-menu:focus {
+  outline: none;
+}
+
+.sdo-menu [hidden] {
+  display: none !important;
+}
+
+.sdo-menu-sort {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  padding-bottom: 6px;
+  border-bottom: 1px solid $sdo-rule;
+}
+
+.sdo-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 36px;
+  padding: 6px 14px;
+  font: inherit;
+  text-align: left;
+  color: $sdo-text;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.sdo-menu-item::before {
+  content: "";
+  flex: none;
+  width: 14px;
+  color: $sdo-amber;
+}
+
+.sdo-menu-item[aria-pressed="true"] {
+  color: $sdo-amber;
+}
+
+.sdo-menu-item[aria-pressed="true"]::before {
+  content: "\2713";
+}
+
+.sdo-menu-item:hover {
+  color: $sdo-amber;
+  background-color: $sdo-bg;
+}
+
+// The focus ring inside the item, so the menu's edges don't cut it off
+.sdo-menu-item:focus-visible {
+  outline-offset: -2px;
+  box-shadow: none;
+}
+
+.sdo-menu-heading {
+  flex: none;
+  padding: 10px 14px 6px;
+  font-size: 13px;
+  color: $sdo-muted;
+}
+
+.sdo-menu-filter {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 8px;
+  min-height: 0;
+  padding: 0 14px;
+}
+
+.sdo-menu input[type="text"],
+.sdo-menu input[type="number"] {
   @include sdo-field;
-  display: block;
   width: 100%;
   min-width: 0;
-  min-height: 30px;
-  padding: 3px 6px;
+  min-height: 34px;
+  padding: 4px 8px;
   font: inherit;
-  font-size: 13px;
 }
 
-.sdo-filter-row input[type="number"] {
+.sdo-menu input::placeholder {
+  color: $sdo-muted;
+  opacity: 1;
+}
+
+.sdo-menu input[type="number"] {
   appearance: textfield;
   -moz-appearance: textfield;
 }
 
-.sdo-filter-row input[type="number"]::-webkit-inner-spin-button,
-.sdo-filter-row input[type="number"]::-webkit-outer-spin-button {
+.sdo-menu input[type="number"]::-webkit-inner-spin-button,
+.sdo-menu input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-.sdo-range {
+.sdo-menu-links {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex: none;
+  gap: 16px;
+}
+
+.sdo-link {
+  padding: 2px 0;
+  font: inherit;
+  font-size: 13px;
+  color: $sdo-amber;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.sdo-link:hover {
+  color: $sdo-amber-hover;
+  text-decoration: underline;
+}
+
+.sdo-menu-list {
+  flex: 1 1 auto;
+  min-height: 72px;
+  max-height: 240px;
+  overflow-y: auto;
+  padding: 4px 0;
+  background-color: $sdo-bg;
+  border: 1px solid $sdo-rule;
+  border-radius: 4px;
+}
+
+.sdo-menu-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  margin: 0;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+
+.sdo-menu-check:hover {
+  background-color: $sdo-field;
+}
+
+.sdo-menu-check span {
+  overflow-wrap: anywhere;
+}
+
+// Checkboxes drawn on the dark palette: an amber tick on a dark box
+.sdo-menu input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  display: grid;
+  place-content: center;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  background-color: $sdo-field;
+  border: 1px solid $sdo-field-border;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.sdo-menu input[type="checkbox"]::before {
+  content: "";
+  width: 9px;
+  height: 5px;
+  border-left: 2px solid $sdo-amber;
+  border-bottom: 2px solid $sdo-amber;
+  transform: translateY(-1px) rotate(-45deg);
+  visibility: hidden;
+}
+
+.sdo-menu input[type="checkbox"]:checked {
+  border-color: $sdo-amber;
+}
+
+.sdo-menu input[type="checkbox"]:checked::before {
+  visibility: visible;
+}
+
+.sdo-menu-empty {
+  margin: 0;
+  font-size: 13px;
+  color: $sdo-muted;
+}
+
+.sdo-menu-bound {
+  display: grid;
+  grid-template-columns: 70px 1fr 14px;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: $sdo-muted;
+}
+
+.sdo-menu-bound .sdo-unit {
+  color: $sdo-muted;
+}
+
+// Bigger targets for fingers
+@media (pointer: coarse) {
+  .sdo-menu-item { min-height: 42px; }
+  .sdo-menu-check { min-height: 38px; }
+  .sdo-link { padding: 8px 0; }
 }
 
 // The hunt number opens the hunt's details

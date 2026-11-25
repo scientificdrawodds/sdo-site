@@ -8,6 +8,7 @@ description-meta: "Free estimated draw odds for every Alaska 2027 drawing permit
 open-graph:
   title: "Alaska 2027 Draw Odds | Scientific Draw Odds"
   description: "Free estimated draw odds for every Alaska 2027 drawing permit hunt."
+body-classes: sdo-wide   # a wider column for the table: see "The Alaska page" in styles.scss
 ---
 
 Applications close December 15, 2026, at 5 p.m. Alaska time, at [hunt.alaska.gov](https://hunt.alaska.gov). Results are posted February 19, 2027.

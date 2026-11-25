@@ -172,6 +172,18 @@ h1.title {
   outline-offset: 2px;
 }
 
+// The Alaska page (body class sdo-wide): one centered column up to 1100px, so all eight table columns show in a
+// 1280px window. Quarto's per-page grid setting (body-width) keeps four fixed side gutters, 242px in all, which
+// leave the column 1023px there, too narrow for the table. Phones keep Quarto's layout.
+@media (min-width: 768px) {
+  body.sdo-wide #quarto-content {
+    grid-template-columns:
+      [screen-start] 1.5em [screen-start-inset] 1fr
+      [page-start page-start-inset body-start-outset body-start body-content-start] minmax(0, 1100px)
+      [body-content-end body-end body-end-outset page-end-inset page-end] 1fr [screen-end-inset] 1.5em [screen-end];
+  }
+}
+
 // State pages: controls, hunt count, hunt table whose column names open sort and filter menus, and hunt details.
 // Everything stays on the dark palette; no white or light backgrounds.
 $sdo-field: #1F1F1F;        // inputs, pick-lists, buttons and the details row
@@ -615,13 +627,13 @@ $sdo-field-border: #3A3A3A;
   background-color: $sdo-field;
 }
 
-// Kept to the visible width of the box, however far the table is scrolled
+// Kept to the visible width of the box, however far the table is scrolled, and no wider than 720px
 .sdo-details-body {
   position: sticky;
   left: 0;
   box-sizing: border-box;
   width: var(--sdo-wrap-w, 100%);
-  max-width: 100%;
+  max-width: min(100%, 720px);
   padding: 10px 12px 12px;
   white-space: normal;
 }
